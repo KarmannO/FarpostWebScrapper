@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Text;
+using FarpostWebScrapper.Parsers;
 
 namespace FarpostWebScrapper.Loaders
 {
@@ -13,6 +14,8 @@ namespace FarpostWebScrapper.Loaders
         private string citiesUrlPostfix = "geo/nav/city";
 
         public event EventHandler onDataRecieved;
+
+        private HtmlParser htmlParser = new HtmlParser();
 
         public static string LoadHtmlByUrl(string url)
         {
@@ -50,6 +53,19 @@ namespace FarpostWebScrapper.Loaders
         public PagesLoader(ExportFormats formatToExport)
         {
             this.formatToExport = formatToExport;
+        }
+
+        public void DoLoadLocations(object sender, DoWorkEventArgs e)
+        {
+            onDataRecieved(this, new HtmlDataEventArgs("Поток загрузки городов инициализирован"));
+            string locationsHtmlData = LoadHtmlByUrl(prefix + citiesUrlPostfix);
+            onDataRecieved(this, new HtmlDataEventArgs("Получены данные в HTML"));
+            htmlParser.ParseCities(locationsHtmlData);
+        }
+
+        public void DoLoadSections(object sender, DoWorkEventArgs e)
+        {
+
         }
 
         public void DoLoad(object sender, DoWorkEventArgs e)

@@ -8,20 +8,25 @@ namespace FarpostWebScrapper
     public partial class MainForm : Form
     {
         PagesLoader loader = new PagesLoader(ExportFormats.FormatJSON);
-        BackgroundWorker backgroundTaskManager = new BackgroundWorker();
+        BackgroundWorker locationsLoader = new BackgroundWorker();
+        BackgroundWorker sectionsLoader = new BackgroundWorker();
+
 
         public MainForm()
         {
             InitializeComponent();
-            backgroundTaskManager.WorkerSupportsCancellation = true;
-            backgroundTaskManager.WorkerReportsProgress = true;
-            backgroundTaskManager.DoWork += loader.DoLoad;
+            locationsLoader.WorkerSupportsCancellation = true;
+            locationsLoader.DoWork += loader.DoLoadLocations;
+
+            sectionsLoader.WorkerSupportsCancellation = true;
+            sectionsLoader.DoWork += loader.DoLoadSections;
+
             loader.onDataRecieved += onLoaderDataRecieved;
         }
 
         private void log(string message)
         {
-            logBox.Invoke((MethodInvoker) delegate { logBox.AppendText(DateTime.Now.ToShortTimeString() + ": " + message + "\n"); });
+            logBox.Invoke((MethodInvoker) delegate { logBox.AppendText(DateTime.Now.ToShortTimeString() + ": " + message + "\r\n"); });
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -37,15 +42,22 @@ namespace FarpostWebScrapper
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            log("Форма загружена");
+            log("[form] Форма загружена");
+            if (locationsLoader.IsBusy == false)
+            {
+                log("[form] Запускаю загрузку городов...");
+                locationsLoader.RunWorkerAsync();
+            }
+            if (sectionsLoader.IsBusy == false)
+            {
+                log("[form] Запускаю загрузку разделов...");
+                sectionsLoader.RunWorkerAsync();
+            }
         }
 
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            if (backgroundTaskManager.IsBusy == false)
-            {
-                backgroundTaskManager.RunWorkerAsync();
-            }
+
         }
     }
 }
