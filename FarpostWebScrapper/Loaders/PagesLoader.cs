@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FarpostWebScrapper.Loaders
 {
@@ -54,9 +52,11 @@ namespace FarpostWebScrapper.Loaders
             this.formatToExport = formatToExport;
         }
 
-        public void LoadPage(string url)
+        public void DoLoad(object sender, DoWorkEventArgs e)
         {
-            onDataRecieved(this, new HtmlDataEventArgs(LoadHtmlByUrl(url)));
+            onDataRecieved(this, new HtmlDataEventArgs("Поток загрузки инициализирован"));
+
+            onDataRecieved(this, new HtmlDataEventArgs("Поток загрузки окончен"));
         }
     }
 }

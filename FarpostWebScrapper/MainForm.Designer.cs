@@ -33,7 +33,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.resultBox = new System.Windows.Forms.ListView();
+            this.downloadButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@
             this.groupBox1.Controls.Add(this.logBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(235, 376);
+            this.groupBox1.Size = new System.Drawing.Size(310, 323);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Логи";
@@ -56,17 +58,19 @@
             this.logBox.Location = new System.Drawing.Point(3, 16);
             this.logBox.Multiline = true;
             this.logBox.Name = "logBox";
-            this.logBox.Size = new System.Drawing.Size(229, 357);
+            this.logBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.logBox.Size = new System.Drawing.Size(304, 304);
             this.logBox.TabIndex = 0;
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Location = new System.Drawing.Point(253, 12);
+            this.groupBox2.Controls.Add(this.downloadButton);
+            this.groupBox2.Location = new System.Drawing.Point(328, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox2.Size = new System.Drawing.Size(361, 108);
+            this.groupBox2.Size = new System.Drawing.Size(258, 108);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Настройка";
@@ -77,10 +81,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.resultBox);
-            this.groupBox3.Location = new System.Drawing.Point(254, 126);
+            this.groupBox3.Location = new System.Drawing.Point(328, 126);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox3.Size = new System.Drawing.Size(360, 262);
+            this.groupBox3.Size = new System.Drawing.Size(258, 209);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Результаты";
@@ -90,15 +94,26 @@
             this.resultBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resultBox.Location = new System.Drawing.Point(3, 16);
             this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(354, 243);
+            this.resultBox.Size = new System.Drawing.Size(252, 190);
             this.resultBox.TabIndex = 0;
             this.resultBox.UseCompatibleStateImageBehavior = false;
+            // 
+            // downloadButton
+            // 
+            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.downloadButton.Location = new System.Drawing.Point(177, 79);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(75, 23);
+            this.downloadButton.TabIndex = 3;
+            this.downloadButton.Text = "Загрузить";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 400);
+            this.ClientSize = new System.Drawing.Size(598, 347);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -109,6 +124,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -121,6 +137,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListView resultBox;
+        private System.Windows.Forms.Button downloadButton;
     }
 }
 
