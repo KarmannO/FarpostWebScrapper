@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FarpostWebScrapper.Loaders;
 
 namespace FarpostWebScrapper
 {
@@ -27,9 +28,18 @@ namespace FarpostWebScrapper
 
         }
 
+        private void onLoaderDataRecieved(object sender, EventArgs e)
+        {
+            HtmlDataEventArgs ed = (HtmlDataEventArgs)e;
+            log(ed.HtmlData);
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             log("Форма загружена");
+            PagesLoader loader = new PagesLoader(ExportFormats.FormatJSON);
+            loader.onDataRecieved += onLoaderDataRecieved;
+            loader.LoadPage("http://farpost.ru/");
         }
     }
 }
